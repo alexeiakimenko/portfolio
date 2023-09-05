@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tomsk</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div class="menu">
+  <a href="{% url 'attraction' %}">Главная</a>
+  <a href="{% url 'places' %}">О достопримечательностях</a>
+    <form action="{% url 'logoutuser'%}" method="post">
+        {% csrf_token %}
+        <button class="top">Выйти</button>
+    </form>
+
+</div>
+{% block content %}
+{% endblock %}
+</body>
+</html>

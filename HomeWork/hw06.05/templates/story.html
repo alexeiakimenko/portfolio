@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>Про Flask</title>
+
+    {% endif %}
+    <link rel="stylesheet" href="{{url_for('static',filename='stories.css')}}">
+</head>
+
+
+
+<body>
+{% block content %}
+{% block menu %}
+<ul class="menu">
+    {% for m in menu %}
+        <li><a href="{{ m[1] }}">{{ m[0] }}</a></li>
+    {% endfor %}
+
+</ul>
+{% endblock%}
+<div class='content'>
+
+   {% if title %}
+    <h1>{{ title }}</h1>
+    {% else %}
+    <h1>Про Flask</h1>
+
+    {% endif %}
+</div>
+{% endblock %}
+<h1>{{ name }} написал нам :</h1>
+<div class="story">{{ story }}</div>
+</body>
+</html>

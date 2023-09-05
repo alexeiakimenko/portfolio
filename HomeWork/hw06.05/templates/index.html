@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% block content %}
+{{ super() }}
+<h3 class="p">Делитесь своими переживаниями</h3>
+<h2>ВАШИ ИСТОРИИ:</h2>
+<ul>
+  {% for p in stories %}
+    <li>
+        <p class="title"><a href="{{ url_for('show_story',id_story=p.id)}}">{{ p.name }}</a></p>
+        <div class="anonce">{{ p.story[:5] }}</div>
+    </li>
+
+    {% endfor %}
+</ul>
+{% endblock %}

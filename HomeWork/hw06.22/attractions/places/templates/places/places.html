@@ -1,0 +1,15 @@
+{% extends 'city/base.html'%}
+{% block content %}
+<h1 align="center">Истории создания:</h1>
+<div class="blocktext">
+    {% for place in places %}
+
+    <div class="text">
+        <h3 align="center"><a href="{% url 'details' place.id %}"> {{ place.title }}</a></h3>
+        <p>{{ place.description|truncatechars:360}}</p>
+    </div>
+
+
+    {% endfor%}
+</div>
+{% endblock %}

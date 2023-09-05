@@ -1,0 +1,9 @@
+{% extends 'city/base.html'%}
+{% block content%}
+<div class="detail">
+    <h1>{{place.title }}</h1>
+
+    {{ place.description|safe }}
+
+</div>
+{%endblock%}

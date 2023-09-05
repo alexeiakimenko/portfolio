@@ -1,0 +1,8 @@
+SELECT *
+FROM Ware
+ORDER BY Price DESC
+LIMIT 5 OFFSET 2 лимит строк со смещением
+
+SELECT *
+FROM Ware
+WHERE ID_salespeople IS NULL

@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+<h1 class="center">КАТАЛОГ КУРСОВ</h1>
+<ol>
+{% for c in courses %}
+<li>
+    <div class="block_cat">
+       <div>Курс: {{ c.title }}</div>
+        <div>стоимость: {{ c.price }}</div>
+
+        <div class="re"><a href="{{ url_for('description',alias=c.title)}}">подробнее</a></div>
+    </div>
+</li>
+
+{% endfor %}
+</ol>
+{% endblock %}

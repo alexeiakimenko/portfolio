@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+<strong>Внесите информацию о курсе:</strong>
+<div class="enter">
+    <form action="{{url_for('change')}}" method="post">
+  <p>Название курса:<input type="text" name="title" ></p>
+  <p>Стоимость курса:<input type="text" name="price"></p>
+    <p>Описание курса:</p>
+    <p><textarea name="description" cols="108" rows="10"></textarea></p>
+     <p><input type="submit" value="Добавить"></p>
+</form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'todo/base.html' %}
+{% block content %}
+<h1>Завершено:</h1>
+<ul>
+    {% for todo in todos %}
+    <li>
+        <a href="{% url 'viewtodo' todo.id %}">
+        {% if todo.impotent %}
+        <b>{{ todo.title }}</b>
+
+        {%else%}
+        {{ todo.title }}
+
+        {% endif %}
+        {% if todo.memo %}
+        --{{ todo.memo }}
+        {% endif%}
+        <div class="time">{{ todo.date_comleted|date:'j.m.Y,H:i' }}</div>
+
+    </a>
+    </li>
+
+    {% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'city/base.html'%}
+{% load static %}
+{% block content %}
+<h1 align="center">Город Томск</h1>
+<div class="img">
+    <img src="{%static 'city/tomsk.jpg'%}" alt="">
+</div>
+<div class="block">
+
+    {% for project in projects%}
+
+
+    <div class="text">
+        <h2>{{project.title}}</h2>
+        <div class="element">
+            <img src="{{project.image.url}}" alt="">
+            <p>{{ project.description }}</p>
+
+        </div>
+    </div>
+    {%endfor%}
+    {% endblock %}
