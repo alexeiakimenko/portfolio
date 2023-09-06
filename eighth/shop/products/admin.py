@@ -1,4 +1,4 @@
-from django.contrib import admin
+﻿from django.contrib import admin
 from .models import *
 from django.urls import path
 from django.shortcuts import render, redirect
@@ -88,6 +88,34 @@ class ProductAdmin(admin.ModelAdmin):
 
 class PhotoAdmin(admin.ModelAdmin):
     list_display = ('product', 'add_photo')
+
+    def get_urls(self):
+        urls = super().get_urls()
+        new_urls = [
+            path('upload_csv_photo/', self.upload_csv)
+        ]
+        return new_urls + urls
+
+    def upload_csv(self, request):
+        if request.method == 'POST':
+            csv_file = request.FILES['csv_uploader']
+
+            if not csv_file.name.endswith('.csv'):
+                messages.warning(request, 'Ошибочный тип файла!')
+                return redirect('.')
+            file_data = csv_file.read().decode('UTF-8')
+            csv_data = file_data.split('\n')
+            for x in csv_data:
+                fields = x.split(',')
+                created = Photo.objects.update_or_create(
+                    id=fields[0],
+                    product=Product(fields[1]),
+                    add_photo=fields[2][:-1],
+                )
+            return redirect('admin:index')
+        form = CsvImportForm()
+        data = {'form': form}
+        return render(request, 'admin/csv_uploader.html', data)
 
 
 admin.site.register(ProductCategory, ProductCategoryAdmin)
