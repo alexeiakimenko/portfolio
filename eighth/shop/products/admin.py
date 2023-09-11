@@ -121,5 +121,5 @@ class PhotoAdmin(admin.ModelAdmin):
 admin.site.register(ProductCategory, ProductCategoryAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Photo, PhotoAdmin)
-
+admin.site.register(Basket)
 # Register your models here.

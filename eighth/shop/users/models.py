@@ -1,5 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.mail import send_mail, BadHeaderError
+from django.conf import settings
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
+from django.utils.timezone import now
 
 
 class User(AbstractUser):
@@ -19,3 +24,21 @@ class EmailVerification(models.Model):
     class Meta:
         verbose_name = 'верификацию'
         verbose_name_plural = 'Верификация по почте'
+
+    def send_verification_email(self):
+        link = reverse('email_verification', kwargs={'email': self.user.email, 'code': self.code})
+        verification_link = f"{settings.DOMAIN_NAME}{link}"
+        subject = f"Подтверждение учётной записи для {self.user.username}"
+        message = f'Для подтвердение учётной записи {self.user.email} перейдите по ссылке {verification_link}.'
+        try:
+            send_mail(
+                subject,
+                message,
+                settings.EMAIL_HOST_USER,
+                [self.user.email],
+            )
+        except BadHeaderError:
+            return HttpResponse('Ошибка!!!')
+
+    def is_expired(self):
+        return True if now() >= self.expiration else False
